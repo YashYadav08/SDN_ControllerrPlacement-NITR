@@ -1,0 +1,26 @@
+Code to Optimize SDN controller placement in WAN(iwde area netwok)
+
+Unsupervised ml algos (Silhoutte and Gap Statistic) are used to find optimal no of controllers.
+And PAM(Partition Around Medoids algorithm)+K-medoids to find the optimal locations to place the controllers.
+These algos are used to analyze the cluster quality through the metric of min distances between data points. So we use these algos to find the no of controllers that minimize the overall switch to switch latency.
+Then PAM is used to minimize the controller-switch latency.
+
+Mininet(a network emulator) is then used to match and verify our outcome - tar folder
+
+------------------------------------------------------------
+
+- .gml file - type of XML file to express geographical features
+...
+- JOHNSON's Algorithm is a way to find the shortest paths between all pairs of vertices in an edge-weighted directed graph (edge weights can be negative but no neg-weight cycles). It works by using the Bellman–Ford algorithm to compute a transformation of the input graph that removes all negative weights, allowing Dijkstra's algorithm to be used on the transformed graph.
+
+Johnson's algorithm consists of the following steps:
+    First, a new node q is added to the graph, connected by zero-weight edges to each of the other nodes.
+    Second, the Bellman–Ford algorithm is used, starting from the new vertex q, to find for each vertex v the minimum weight h(v) of a path from q to v. If this step detects a negative cycle, the algorithm is terminated.
+    Next the edges of the original graph are reweighted using the values computed by the Bellman–Ford algorithm: an edge from u to v, having length w ( u , v ) is given the new length w(u,v) + h(u) − h(v).
+    Finally, q is removed, and Dijkstra's algorithm is used to find the shortest paths from each node s to every other vertex in the reweighted graph. The distance in the original graph is then computed for each distance D(u , v), by adding h(v) − h(u) to the distance returned by Dijkstra's algorithm. 
+...
+K-medoids - calculated by minimizing the absolute distance between the points and the selected centroid, rather than minimizing the square distance. As a result, it's more robust to noise and outliers than k-means.
+...
+
+
+

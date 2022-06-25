@@ -1,0 +1,62 @@
+% Author: Lusani Mamushiane
+%Date:February 2018
+%Optimal Controller Placement in SDN-enabled core networks
+T
+%#######################################################################
+
+clear all;
+clc;
+% Get the Graph structure:
+graph = read_gml('Sanren.gml');
+
+% Show the Graph structure:
+show_graph = graph;
+show_nodes = graph.node;
+show_node2 = graph.node(2);
+show_edges = graph.edge;
+
+%display link capacities denoted by label for the Aarnet.gml
+C=[];
+%for i=1:length(graph.edge)  
+    %C(i,1)=graph.edge(i).LinkLabel;
+%end
+C;
+%show_weight = graph.edge(4).LinkLabel;
+% Change example edge value
+%graph.edge(3).value = 9;
+
+%Read coordinates of nodes (Lat,Long) from the gml file
+D=[];
+for i=1:length(graph.node)  
+    D(i,1)=graph.node(i).Latitude;
+    D(i,2)=graph.node(i).Longitude;
+    %[X(i) Y(i)]=grn2eqa(D(i,1),D(i,2)) %install  Mapping Toolbox
+end
+D; %display the coordinates matrix (iX2)
+
+%get the labels/locations of nodes
+L={};
+  %M=num2str(graph.node(1).label)
+for i=1:length(graph.node)  
+    L{1,i}=num2str(graph.node(i).id); %node ids
+    L{2,i}=num2str(graph.node(i).label); %node labels
+    %[X(i) Y(i)]=grn2eqa(D(i,1),D(i,2)) %install  Mapping Toolbox
+end
+L;
+% Adjacency Matrix: row: Source, column: Target
+A = get_adjacency_matrix(graph);
+
+%plot topology
+for i=1:length(graph.node)
+line(D(i,1),D(i,2),'MarkerSize',35,'Marker','.','Color','r')
+end 
+hold on
+gplot(A,D,'-b')
+axis square
+for i=1:length(graph.node)
+text(D(i,1),D(i,2),L{2,i},'FontSize',8,'Color','black');
+end
+
+
+
+
